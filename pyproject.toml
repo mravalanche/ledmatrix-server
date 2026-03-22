@@ -1,0 +1,32 @@
+[project]
+name = "ledmatrix_server"
+version = "0.1.0"
+description = "Server-side component to the ledmatrix"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "bdfparser>=2.2.0",
+    "dotenv>=0.9.9",
+    "pillow>=12.1.1",
+    "requests>=2.32.5",
+    "rich>=14.3.3",
+]
+
+[dependency-groups]
+dev = [
+    "deptry>=0.24.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.6",
+    "ty>=0.0.23",
+]
+
+[tool.ruff]
+lint.ignore = ["E701"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.setuptools.package-data]
+ledmatrix_server = ["resources/fonts/*.bdf", "resources/images/**/*"]

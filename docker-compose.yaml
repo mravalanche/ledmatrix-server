@@ -1,0 +1,9 @@
+services:
+    python:
+        build: .
+        volumes:
+            - site_data:/output
+        restart: unless-stopped
+
+volumes:
+    site_data:
