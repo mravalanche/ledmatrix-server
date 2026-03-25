@@ -11,7 +11,6 @@ from ledmatrix_server.render import Display, ImageComponent, TextComponent
 from ledmatrix_server.helpers import is_christmas
 from ledmatrix_server.config import config
 
-
 output = config.output_path
 if not output:
     output = "output"

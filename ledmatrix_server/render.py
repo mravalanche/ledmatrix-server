@@ -4,6 +4,7 @@ from abc import ABC
 from dataclasses import dataclass
 from bdfparser import Font as BDFFont
 from bdfparser import Bitmap
+from importlib.resources import as_file
 
 from ledmatrix_server.resources.loader import get_font
 
@@ -12,11 +13,18 @@ from ledmatrix_server.resources.loader import get_font
 # Classes
 # -------------------------
 
+def _load_bdf(font_name:str):
+    font_path = get_font(font_name)
+
+    with as_file(font_path) as path:
+        return BDFFont(str(path))
+
+
 class Font:
-    tiny=BDFFont(get_font("CG-pixel-4x5-mono.bdf"))
-    small=BDFFont(get_font("tb-8.bdf"))
-    medium=BDFFont(get_font("Dina_r400-6.bdf"))
-    large=BDFFont(get_font("10x20_reduced-20.bdf"))
+    tiny=_load_bdf("CG-pixel-4x5-mono.bdf")
+    small=_load_bdf("tb-8.bdf")
+    medium=_load_bdf("Dina_r400-6.bdf")
+    large=_load_bdf("10x20_reduced-20.bdf")
 
 
 @dataclass
