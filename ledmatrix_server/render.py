@@ -70,7 +70,15 @@ class Display():
         return (r ,g, b, 255)
 
     def _render_text_component(self, c: TextComponent):
-        bitmap:Bitmap = c.font.draw(c.text)
+        font = c.font
+
+        # Patch font with default headers, to issues on some platforms
+        font.headers.setdefault("fbbx", 4)
+        font.headers.setdefault("fbby", 5)
+        font.headers.setdefault("fbbxoff", 0)
+        font.headers.setdefault("fbbyoff", 0)
+
+        bitmap:Bitmap = font.draw(c.text)
         rgba:bytes = bitmap.tobytes(mode="RGBA")
 
         text_img = Image.frombytes(
